@@ -1,5 +1,5 @@
 const express = require("express");
-const Model = require("../models/customer");
+const Model = require("../models/student");
 const router = express.Router();
 const auth = require("../middlewares/authJwt");
 
@@ -53,20 +53,6 @@ router.post("/post", async (req, res) => {
 });
 
 
-
-//Get all Method
-/*
-router.get('/getall',auth.protect, async (req, res) => {
-    try {
-        const data = await Model.find();
-        res.json(data)
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-})
-*/
-
 //Get by ID Method
 router.get("/", async (req, res) => {
   let { no } = req.query;
@@ -106,9 +92,9 @@ router.get("/search/", async (req, res) => {
     if (data.length > 0) {
       res
         .status(200)
-        .send({ success: true, msg: "Customer Details", data: data });
+        .send({ success: true, msg: "Student Details", data: data });
     } else {
-      res.status(200).send({ success: true, msg: "Customer Not found!" });
+      res.status(200).send({ success: true, msg: "Student Not found!" });
     }
   } catch (error) {
     res.status(400).send({ success: false, msg: error.message });
@@ -180,7 +166,7 @@ router.get("/all", async (req, res) => {
     ]);
     return res
       .status(200)
-      .send({ success: true, msg: "Sucess", customer: result });
+      .send({ success: true, msg: "Sucess", student: result });
   } catch (error) {
     res.status(400).send({ success: false, msg: error.message });
   }

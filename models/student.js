@@ -39,6 +39,6 @@ const dataSchema = new mongoose.Schema({
 
 
 dataSchema.plugin(mongoosePaginate);
-const Customermodel = mongoose.model('Customer', dataSchema);
-Customermodel.paginate().then({}); // Usage
-module.exports = Customermodel;
+const Studentmodel = mongoose.model('Student', dataSchema);
+Studentmodel.paginate().then({}); // Usage
+module.exports = Studentmodel;
