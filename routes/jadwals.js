@@ -7,27 +7,10 @@ const Matpel = require("../models/matpel");
 const mongoose = require("mongoose");
 
 router.post("/post", async (req, res) => {
-  const data = new Model({
-    kode: req.body.kode,
-    hari: req.body.hari,
-    id_guru: req.body.id_guru,
-    id_matpel: req.body.id_matpel,
-    kelas: req.body.kelas,
-  });
-
   try {
-    const dataToSave = await data.save();
-    res.status(200).json(dataToSave);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
+    const { kode, hari, id_guru, id_matpel, id_kelas } = req.body;
 
-router.post("/post", async (req, res) => {
-  try {
-    const { kode, hari, id_guru, id_matpel, kelas } = req.body;
-
-    if (!id_guru || !id_matpel || !kelas) {
+    if (!id_guru || !id_matpel || !id_kelas) {
       return res.status(408).json({
         success: false,
         messages: "Please Fill all fields",
@@ -50,8 +33,8 @@ router.post("/post", async (req, res) => {
       kode: kode,
       id_guru: id_guru,
       id_matpel: id_matpel,
-      kelas: kelas,
       hari: hari,
+      id_kelas: id_kelas,
     });
     //customer.transactions.push(newTransaction);
 

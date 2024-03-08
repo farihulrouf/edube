@@ -10,10 +10,7 @@ const dataSchema = new mongoose.Schema({
     type: String,
     enum: ["Senin", "Selasa", "Rabu", "Kamis", "Juma", "Sabtu", "Minggu"],
   },
-  kelas: {
-    required: true,
-    type: String,
-  },
+
   awal_jam: {
     type: Date,
     default: Date.now,
@@ -34,6 +31,11 @@ const dataSchema = new mongoose.Schema({
   id_matpel: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Matpel",
+  },
+
+  id_kelas: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Kelas",
   },
 
   created_at: {

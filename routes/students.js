@@ -2,6 +2,7 @@ const express = require("express");
 const Model = require("../models/student");
 const router = express.Router();
 const auth = require("../middlewares/authJwt");
+const mongoose = require("mongoose");
 
 const getPagination = (page, size) => {
   const limit = size ? +size : 5;
@@ -42,6 +43,7 @@ router.post("/post", async (req, res) => {
     no_tel: req.body.no_tel,
     addres: req.body.addres,
     gender: req.body.gender,
+    id_kelas: req.body.id_kelas,
   });
 
   try {
@@ -51,7 +53,6 @@ router.post("/post", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-
 
 //Get by ID Method
 router.get("/", async (req, res) => {
@@ -81,8 +82,6 @@ router.post("/getnomer", async (req, res) => {
     res.status(400).send({ success: false, msg: error.message });
   }
 });
-
-
 
 router.get("/search/", async (req, res) => {
   try {
@@ -129,11 +128,15 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 router.get("/all", async (req, res) => {
-  let { page, limit, s } = req.query;
+  let { page, limit, s, k } = req.query;
+  //    {$match: {"$and": [{season: 2}, {customer_id: '905250069463326740'}, {status: "Completed"}]}},
 
   try {
     var condition = s ? { name: { $regex: new RegExp(s), $options: "i" } } : {};
     const result = await Model.aggregate([
+      {
+        $match: { id_kelas: mongoose.Types.ObjectId(k) },
+      },
       {
         $match: condition,
       },
