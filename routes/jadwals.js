@@ -2,7 +2,7 @@ const express = require("express");
 const Model = require("../models/jadwal");
 const router = express.Router();
 const auth = require("../middlewares/authJwt");
-const jadwal = require("../models/jadwal");
+//const Model = require("../models/Model");
 const Matpel = require("../models/matpel");
 const mongoose = require("mongoose");
 
@@ -46,7 +46,7 @@ router.post("/post", async (req, res) => {
   */
     }
 
-    let newJadwal = await jadwal.create({
+    let newModel = await Model.create({
       kode: kode,
       id_guru: id_guru,
       id_matpel: id_matpel,
@@ -60,7 +60,7 @@ router.post("/post", async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Jawal Added Successfully",
-      data: newJadwal,
+      data: newModel,
     });
   } catch (err) {
     return res.status(401).json({
@@ -75,7 +75,7 @@ router.get("/getjdwal", async (req, res) => {
     const { id_techer } = req.query;
     console.log("teest", id_techer);
 
-    const result = await jadwal.aggregate([
+    const result = await Model.aggregate([
       {
         $match: {
           id_guru: mongoose.Types.ObjectId(id_techer),

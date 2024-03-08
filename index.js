@@ -13,10 +13,11 @@ const users = require('./routes/users')
 const contents = require('./routes/contents')
 const matpels = require('./routes/matpels')
 const jadwals = require('./routes/jadwals')
+const kelas = require('./routes/kelas')
 app.get('/', (req, res) => {
     res.send('Hey this is my API running 🥳')
 })
-
+app.use('/kelas', kelas)
 app.use('/jadwals', jadwals)
 app.use('/teachers', teachers)
 app.use('/students', students)
