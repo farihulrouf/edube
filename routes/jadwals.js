@@ -73,7 +73,6 @@ router.post("/post", async (req, res) => {
 router.get("/getjdwal", async (req, res) => {
   try {
     const { id_techer } = req.query;
-    console.log("teest", id_techer);
 
     const result = await Model.aggregate([
       {
