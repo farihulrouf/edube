@@ -1,23 +1,15 @@
 const mongoose = require('mongoose');
 
 const dataSchema = new mongoose.Schema({
-    harga: {
+    name: {
         required: true,
-        type: Number
+        type: String
     },
-    minimum: {
+    kode: {
         required: true,
-        type: Number
+        type: String
     },
-    maximum: {
-        required: true,
-        type: Number
-    },
-    satuan: {
-        required: true,
-        type: String,
-        default: 'kubik'
-    },
+
     created_at:{
         type:Date,
         default:Date.now
@@ -31,4 +23,4 @@ const dataSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Price', dataSchema)
+module.exports = mongoose.model('Matpel', dataSchema)

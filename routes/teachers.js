@@ -1,5 +1,5 @@
 const express = require("express");
-const Model = require("../models/student");
+const Model = require("../models/teacher");
 const router = express.Router();
 const auth = require("../middlewares/authJwt");
 

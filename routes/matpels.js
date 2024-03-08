@@ -1,13 +1,11 @@
 const express = require("express");
-const Model = require("../models/price");
+const Model = require("../models/matpel");
 const router = express.Router();
 const auth = require("../middlewares/authJwt");
 router.post("/post", async (req, res) => {
   const data = new Model({
-    harga: req.body.harga,
-    satuan: req.body.satuan,
-    minimum: req.body.minimum,
-    maximum: req.body.maximum,
+    name: req.body.name,
+    kode: req.body.kode
   });
 
   try {
@@ -17,32 +15,6 @@ router.post("/post", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-
-{/*
-router.put("/:id", async (req, res) => {
-  if (!req.body) {
-    return res.status(400).send({
-      message: "Data to update can not be empty!",
-    });
-  }
-  const id = req.params.id;
-  ///:id
-  //console.log('cek id', id)
-  Model.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then((data) => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot update Price with id=${id}. Maybe price  was not found!`,
-        });
-      } else res.send({ message: "Price was updated successfully." });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error updating Price with id=" + id,
-      });
-    });
-});
-*/}
 
 
 router.put("/:id", async (req, res) => {
