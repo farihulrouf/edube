@@ -4,16 +4,19 @@ const auth = require("../middlewares/authJwt");
 const Model = require("../models/attendance");
 const mongoose = require("mongoose");
 
+
 // Endpoint to handle saving multiple attendance data
-router.post("/save-attendance", async (req, res) => {
+{/*router.post("/save-attendance", async (req, res) => {
   const attendanceDataArray = req.body;
 
   try {
+    console.log("Received Attendance Data:", attendanceDataArray);
+
     // Create an array of new instances of the Attendance model
     const attendanceArray = attendanceDataArray.map(
       (attendanceData) => new Model(attendanceData)
     );
-   // console.log('cek',attendanceArray)
+    // console.log('cek',attendanceArray)
     // Save the array of attendance data to the database
     await Model.insertMany(attendanceArray);
 
@@ -24,7 +27,36 @@ router.post("/save-attendance", async (req, res) => {
       .status(500)
       .json({ success: false, message: "Error saving attendance." });
   }
-});
+});*/}
+
+
+router.post("/save-attendance", async (req, res) => {
+    const attendanceDataArray = req.body;
+  
+    try {
+      console.log("Received Attendance Data:", attendanceDataArray);
+  
+      // Check if attendanceDataArray is an array
+      if (!Array.isArray(attendanceDataArray)) {
+        throw new Error("Invalid attendance data format. Expecting an array.");
+      }
+  
+      // Create an array of new instances of the Attendance model
+      const attendanceArray = attendanceDataArray.map(
+        (attendanceData) => new Model(attendanceData)
+      );
+  
+      // Save the array of attendance data to the database
+      await Model.insertMany(attendanceArray);
+  
+      res.json({ success: true, message: "Attendance saved successfully." });
+    } catch (error) {
+      //console.error("Error saving attendance:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Error saving attendance." });
+    }
+  });
 
 router.get("/all", async (req, res) => {
   try {
