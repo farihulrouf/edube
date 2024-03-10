@@ -11,11 +11,11 @@ router.post("/save-attendance", async (req, res) => {
   try {
     // Create an array of new instances of the Attendance model
     const attendanceArray = attendanceDataArray.map(
-      (attendanceData) => new Attendance(attendanceData)
+      (attendanceData) => new Model(attendanceData)
     );
-
+   // console.log('cek',attendanceArray)
     // Save the array of attendance data to the database
-    await Attendance.insertMany(attendanceArray);
+    await Model.insertMany(attendanceArray);
 
     res.json({ success: true, message: "Attendance saved successfully." });
   } catch (error) {
